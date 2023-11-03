@@ -1,0 +1,213 @@
+@import url("./fonts/fonts.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: estedad;
+}
+
+.swiper-pagination {
+  background-color: white;
+  width: fit-content !important;
+  position: absolute;
+  bottom: -0.25em !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto;
+  padding: 0.5em 0.25em;
+  border-radius: 1.5em;
+  display: flex;
+  align-items: center;
+}
+.swiper-pagination::before {
+  content: "";
+  width: 2.2em;
+  height: 1.5em;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  transform: rotate(-45deg) translate(-1em, -0.65em);
+}
+.swiper-pagination::after {
+  content: "";
+  width: 2.2em;
+  height: 1.5em;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  top: 0.55em;
+  transform: rotate(45deg) translate(1em, -0.65em);
+}
+.swiper-pagination-bullet {
+  width: 6px !important;
+  height: 6px !important;
+  background-color: #adadad !important;
+  opacity: 1 !important;
+  z-index: inherit;
+}
+.swiper-pagination-bullet-active {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #417f56 !important;
+  z-index: inherit;
+  box-shadow: 0 0 0 3px #e5f2e9;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #efefef;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #adadad;
+  border-radius: 5px;
+}
+
+.Toastify__toast-container {
+  width: fit-content !important;
+  position: fixed;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0.75em auto !important;
+}
+.Toastify__toast {
+  margin: 0 !important;
+}
+
+.Toastify__toast-body {
+  margin: 0 !important;
+  height: 30px !important;
+  padding-left: 2.5em !important;
+}
+.Toastify__toast {
+  min-height: 30px !important;
+  width: fit-content !important;
+  margin: 0 auto 0.5em auto !important;
+}
+
+.Toastify__toast--success,
+.Toastify__toast--error {
+  border-radius: 2em !important;
+  line-height: 0 !important;
+}
+
+.Toastify__progress-bar {
+  background-color: transparent !important;
+}
+
+.rmdp-shadow {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+}
+.datePickerInput {
+  width: 100%;
+  border: 1px solid #cbcbcb;
+  font-size: 14px;
+  color: #353535;
+  border-radius: 6px;
+  outline: none;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+.datePickerInput::placeholder {
+  color: #717171;
+}
+.rmdp-calendar {
+  box-shadow: none !important;
+}
+.rmdp-header {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+.rmdp-header-values,
+.rmdp-day span {
+  color: #353535 !important;
+}
+
+.rmdp-day span:hover,
+.rmdp-today span {
+  background: #e5f2e9 !important;
+  color: #417f56 !important;
+  border-radius: 2em !important;
+  transition: all 0.3s;
+}
+.rmdp-selected span {
+  background: #417f56 !important;
+  color: white !important;
+  border-radius: 2em !important;
+  box-shadow: none !important;
+}
+.rmdp-arrow-container {
+  border: 1px solid #417f56 !important;
+  box-shadow: none !important;
+}
+.rmdp-arrow-container:hover {
+  background: white !important;
+}
+.rmdp-arrow {
+  border-color: #417f56 !important;
+}
+.rmdp-week-day {
+  color: #717171 !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .swiper-pagination {
+    bottom: 0 !important;
+  }
+  .swiper-pagination-bullet {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  .swiper-pagination-bullet-active {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  .Toastify__toast-container {
+    font-size: 15px !important;
+    position: fixed !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin: 1em auto !important;
+    transform: translateX(50%) !important;
+  }
+
+  .Toastify__toast-body {
+    padding-left: 0em !important;
+    height: 40px !important;
+  }
+
+  .Toastify__toast {
+    width: 270px !important;
+    min-height: 40px !important;
+    margin-bottom: 1em !important;
+  }
+  .datePickerInput {
+    padding: 7px 12px;
+    font-size: 16px;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 2px;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
