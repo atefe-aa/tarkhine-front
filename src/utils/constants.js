@@ -29,3 +29,5 @@ export const navigation = [
 
 export const featuresBoxItemStyle =
   "flex flex-col items-center gap-y-2 text-[11px] sm:text-xs md:text-base";
+
+  export const API_URL = 'http://127.0.0.1:8000/api';

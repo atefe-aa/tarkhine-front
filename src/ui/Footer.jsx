@@ -1,5 +1,6 @@
 import footerImg from "../images/footer.jpg";
 import { Link } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 // icons
 import {
@@ -10,6 +11,8 @@ import {
   instagramDesktopIcon,
   twitterDesktopIcon,
 } from "../icons/footerIcons";
+import { useBranches } from "../features/branches/useBranches";
+import ListItem from "./ListItem";
 
 // styles
 const footerStyle =
@@ -29,6 +32,8 @@ const buttonStyle =
   "text-[#F9F9F9] font-medium w-[11.438em] h-[2.5em] border border-[#717171] rounded";
 
 const Footer = () => {
+  const { isLoading, branches } = useBranches();
+
   return (
     <footer
       style={{ "--image-url": `url(${footerImg})` }}
@@ -62,8 +67,18 @@ const Footer = () => {
 
         <div>
           <h4 className={h4Style}>شعبه های ترخینه</h4>
-          <ul className={ulStyle}>
-            <li className={liStyle}>
+          {isLoading?  <ReactLoading
+              type="bubbles"
+              color="#417F56"
+              height={60}
+              width={60}
+            /> : <ul className={ulStyle}>
+            {branches.map((branch) => (
+              <ListItem key={branch.id} className={liStyle} link="/contact">
+                {branch.name}
+              </ListItem>
+            ))}
+            {/* <li className={liStyle}>
               <Link to="/contact">شعبه اکباتان</Link>
             </li>
             <li className={liStyle}>
@@ -74,8 +89,10 @@ const Footer = () => {
             </li>
             <li className={liStyle}>
               <Link to="/contact">شعبه ونک</Link>
-            </li>
+            </li> */}
           </ul>
+}
+         
         </div>
 
         <div className="hidden lg:block">
