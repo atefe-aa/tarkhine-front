@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
 
 // functions
-import { convertToFa } from "../utils/functions";
+// import { convertToFa } from "../utils/functions";
 
 // URLs
-import { headerURLs, headerButtonURLs } from "../utils/URLs";
+import { headerButtonURLs } from "../utils/URLs";
 
 // icons
 import {
@@ -19,6 +19,9 @@ import {
   searchIcon,
 } from "../icons/headerIcons";
 import { useState } from "react";
+import { navigation } from "../utils/constants";
+import NavItem from "./NavItem";
+import DropDown from "./DropDown";
 
 // styles
 const headerStyle =
@@ -33,8 +36,8 @@ const linkBoxItemStyle =
   "p-[0.25em] md:p-[0.5em] bg-[#E5F2E9] text-[#417F56] rounded md:rounded-md scale-[1.2] md:scale-100 relative duration-300";
 const linkBoxItemActiveStyle =
   "p-[0.25em] md:p-[0.5em] bg-[#417F56] text-white rounded md:rounded-md scale-[1.2] md:scale-100 relative duration-300";
-const itemsCounterStyle =
-  "absolute -top-1 -right-1.5 text-[10px] text-white bg-[#61AE7B] rounded-full px-1  md:right-0.5 md:top-0.5 font-medium";
+// const itemsCounterStyle =
+//   "absolute -top-1 -right-1.5 text-[10px] text-white bg-[#61AE7B] rounded-full px-1  md:right-0.5 md:top-0.5 font-medium";
 
 const Header = () => {
   // const state = useSelector((state) => state.cartState);
@@ -67,51 +70,26 @@ const Header = () => {
 
         <div className="hidden md:block">
           <ul className={ulStyle}>
-            <li
-              className={
-                window.location.href === headerURLs.home
-                  ? liActiveStyle
-                  : liStyle
-              }
-            >
-              <Link to="/">صفحه اصلی</Link>
-            </li>
-            <li
-              className={
-                window.location.href === headerURLs.menu
-                  ? liActiveStyle
-                  : liStyle
-              }
-            >
-              <Link to="/menu">منو</Link>
-            </li>
-            <li
-              className={
-                window.location.href === headerURLs.branchApply
-                  ? liActiveStyle
-                  : liStyle
-              }
-            >
-              <Link to="/branchApply">اعطای نمایندگی</Link>
-            </li>
-            <li
-              className={
-                window.location.href === headerURLs.about
-                  ? liActiveStyle
-                  : liStyle
-              }
-            >
-              <Link to="/about">درباره ما</Link>
-            </li>
-            <li
-              className={
-                window.location.href === headerURLs.contact
-                  ? liActiveStyle
-                  : liStyle
-              }
-            >
-              <Link to="/contact">تماس با ما</Link>
-            </li>
+            {navigation.map((item) => (
+               item.href === "#" ? (
+                <DropDown
+                  options={item.options}
+                  key={item.name}
+                  className={`${liStyle} cursor-pointer`}
+                >
+                  {item.name}
+                </DropDown>
+              ) : (
+              <NavItem
+                key={item.name}
+                link={item.href}
+                className={
+                  window.location.href.includes(item.href)
+                    ? liActiveStyle
+                    : liStyle
+                }
+              >{item.name}</NavItem>)
+            ))}
           </ul>
         </div>
 

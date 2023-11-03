@@ -1,33 +1,32 @@
+// icons
+import {
+  homeIcon,
+  menuBoardIcon,
+  hashtagIcon,
+  profile2userIcon,
+  callingIcon,
+} from "../icons/mobileMenuIcons";
+
 export const navigation = [
-  { name: "صفحه اصلی", href: "/home", current: true },
+  { name: "صفحه اصلی", href: "/home", icon: homeIcon },
   {
     name: "شعبه",
     href: "#",
-    options: [
-      { name: "شعبه تجریش", href: "#" },
-      { name: "شعبه شمال", href: "#" },
-      { name: "شعبه زعفرانیه", href: "#" },
-    ],
-    current: false,
+    options: "branches",
+    icon: hashtagIcon,
   },
   {
     name: "منو",
     href: "#",
-    options: [
-      { name: "غذای اصلی", href: "#" },
-      { name: "پیش غذا", href: "#" },
-      { name: "دسر", href: "#" },
-      { name: "نوشیدنی", href: "#" },
-    ],
-    current: false,
+    options: "menu",
+    icon: menuBoardIcon,
   },
-  { name: "اعطای نمایندگی", href: "/branchApply", current: false },
-  { name: "درباره ما", href: "/about", current: false },
-  { name: "تماس با ما", href: "/contact", current: false },
+  { name: "اعطای نمایندگی", href: "/branchApply", icon: hashtagIcon },
+  { name: "درباره ما", href: "/about", icon: profile2userIcon },
+  { name: "تماس با ما", href: "/contact", icon: callingIcon },
 ];
-
 
 export const featuresBoxItemStyle =
   "flex flex-col items-center gap-y-2 text-[11px] sm:text-xs md:text-base";
 
-  export const API_URL = 'http://127.0.0.1:8000/api';
+export const API_URL = "http://127.0.0.1:8000/api";

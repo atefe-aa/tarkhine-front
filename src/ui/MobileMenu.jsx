@@ -1,24 +1,15 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-
-// URLs
-import { headerURLs } from "../utils/URLs";
 
 // images
 import TopFrame from "../images/top-frame.png";
 import LogoMobile from "../images/logo-mobile-menu.png";
 
 // icons
-import {
-  menuIcon,
-  closeIcon,
-  homeIcon,
-  menuBoardIcon,
-  hashtagIcon,
-  profile2userIcon,
-  callingIcon,
-} from "../icons/mobileMenuIcons";
-import { Link } from "react-router-dom";
+import { menuIcon, closeIcon } from "../icons/mobileMenuIcons";
+import { navigation } from "../utils/constants";
+import NavItem from "./NavItem";
+import DropDown from "./DropDown";
 
 // styles
 const bgMenu =
@@ -65,75 +56,34 @@ const MobileMenu = () => {
 
         <RadioGroup value={plan} onChange={setPlan}>
           <ul className={ulStyle}>
-            <li onClick={openMenu}>
-              <Link
-                to="/"
-                className={
-                  window.location.href === headerURLs.home
-                    ? liActiveStyle
-                    : liStyle
-                }
-              >
-                <span>{homeIcon}</span>
-                <span>صفحه اصلی</span>
-              </Link>
-            </li>
-
-            <li onClick={openMenu}>
-              <Link
-                to="/menu"
-                className={
-                  window.location.href === headerURLs.menu
-                    ? liActiveStyle
-                    : liStyle
-                }
-              >
-                <span>{menuBoardIcon}</span>
-                <span>منو</span>
-              </Link>
-            </li>
-
-            <li onClick={openMenu}>
-              <Link
-                to="/branchApply"
-                className={
-                  window.location.href === headerURLs.branchApply
-                    ? liActiveStyle
-                    : liStyle
-                }
-              >
-                <span>{hashtagIcon}</span>
-                <span>اعطای نمایندگی</span>
-              </Link>
-            </li>
-
-            <li onClick={openMenu}>
-              <Link
-                to="/about"
-                className={
-                  window.location.href === headerURLs.about
-                    ? liActiveStyle
-                    : liStyle
-                }
-              >
-                <span>{profile2userIcon}</span>
-                <span>درباره ما</span>
-              </Link>
-            </li>
-
-            <li onClick={openMenu}>
-              <Link
-                to="/contact"
-                className={
-                  window.location.href === headerURLs.contact
-                    ? liActiveStyle
-                    : liStyle
-                }
-              >
-                <span>{callingIcon}</span>
-                <span>تماس با ما</span>
-              </Link>
-            </li>
+            {navigation.map(
+              (item) =>
+                item.href === "#" ? (
+                  <DropDown
+                    options={item.options}
+                    key={item.name}
+                    className={`${liStyle} cursor-pointer`}
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.name}</span>
+                  </DropDown>
+                ) : (
+                  <NavItem
+                    onClick={openMenu}
+                    link={item.href}
+                    key={item.name}
+                    className={
+                      window.location.href.includes(item.href)
+                        ? liActiveStyle
+                        : liStyle
+                    }
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.name}</span>
+                  </NavItem>
+                ),
+              // );
+            )}
           </ul>
         </RadioGroup>
       </div>
