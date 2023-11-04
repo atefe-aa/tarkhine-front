@@ -21,7 +21,7 @@ import {
 import { useState } from "react";
 import { navigation } from "../utils/constants";
 import NavItem from "./NavItem";
-import DropDown from "./DropDown";
+import MenuDropDown from "./MenuDropDown";
 
 // styles
 const headerStyle =
@@ -70,26 +70,30 @@ const Header = () => {
 
         <div className="hidden md:block">
           <ul className={ulStyle}>
-            {navigation.map((item) => (
-               item.href === "#" ? (
-                <DropDown
+            {navigation.map((item) =>
+              item.href === "#" ? (
+                <MenuDropDown
                   options={item.options}
                   key={item.name}
-                  className={`${liStyle} cursor-pointer`}
+                  className={`${liStyle}`}
+                  type="header"
                 >
                   {item.name}
-                </DropDown>
+                </MenuDropDown>
               ) : (
-              <NavItem
-                key={item.name}
-                link={item.href}
-                className={
-                  window.location.href.includes(item.href)
-                    ? liActiveStyle
-                    : liStyle
-                }
-              >{item.name}</NavItem>)
-            ))}
+                <NavItem
+                  key={item.name}
+                  link={item.href}
+                  className={
+                    window.location.href.includes(item.href)
+                      ? liActiveStyle
+                      : liStyle
+                  }
+                >
+                  {item.name}
+                </NavItem>
+              ),
+            )}
           </ul>
         </div>
 

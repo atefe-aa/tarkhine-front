@@ -18,7 +18,7 @@ export const navigation = [
   {
     name: "منو",
     href: "#",
-    options: "menu",
+    options: "categories",
     icon: menuBoardIcon,
   },
   { name: "اعطای نمایندگی", href: "/branchApply", icon: hashtagIcon },

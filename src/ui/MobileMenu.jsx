@@ -9,7 +9,7 @@ import LogoMobile from "../images/logo-mobile-menu.png";
 import { menuIcon, closeIcon } from "../icons/mobileMenuIcons";
 import { navigation } from "../utils/constants";
 import NavItem from "./NavItem";
-import DropDown from "./DropDown";
+import MenuDropDown from "./MenuDropDown";
 
 // styles
 const bgMenu =
@@ -56,33 +56,32 @@ const MobileMenu = () => {
 
         <RadioGroup value={plan} onChange={setPlan}>
           <ul className={ulStyle}>
-            {navigation.map(
-              (item) =>
-                item.href === "#" ? (
-                  <DropDown
-                    options={item.options}
-                    key={item.name}
-                    className={`${liStyle} cursor-pointer`}
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.name}</span>
-                  </DropDown>
-                ) : (
-                  <NavItem
-                    onClick={openMenu}
-                    link={item.href}
-                    key={item.name}
-                    className={
-                      window.location.href.includes(item.href)
-                        ? liActiveStyle
-                        : liStyle
-                    }
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.name}</span>
-                  </NavItem>
-                ),
-              // );
+            {navigation.map((item) =>
+              item.href === "#" ? (
+                <MenuDropDown
+                  options={item.options}
+                  key={item.name}
+                  className={liStyle}
+                  type="menu"
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.name}</span>
+                </MenuDropDown>
+              ) : (
+                <NavItem
+                  onClick={openMenu}
+                  link={item.href}
+                  key={item.name}
+                  className={
+                    window.location.href.includes(item.href)
+                      ? liActiveStyle
+                      : liStyle
+                  }
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.name}</span>
+                </NavItem>
+              ),
             )}
           </ul>
         </RadioGroup>
