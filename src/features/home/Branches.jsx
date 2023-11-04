@@ -10,7 +10,7 @@ const containerStyle =
 const branchesBoxStyle =
   "flex items-center gap-x-2 border border-[#CBCBCB] hover:border-[#417F56] duration-500 rounded-lg overflow-hidden mb-3 md:flex-col md:gap-y-2 md:w-[18em]";
 const h3Style =
-  "font-bold text-lg mb-3 text-[#353535] md:text-xl md:mb-6 lg:text-2xl";
+  "font-bold text-lg mb-3  text-center text-[#353535] md:text-xl md:mb-6 lg:text-2xl";
 const coverStyle =
   "bg-[image:var(--image-url)] bg-cover bg-center w-[9em] h-20 md:w-[18em] md:h-36 lg:h-[14.375em]";
 const descriptionBoxStyle =

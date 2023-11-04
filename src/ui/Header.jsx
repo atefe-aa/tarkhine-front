@@ -26,12 +26,12 @@ import MenuDropDown from "./MenuDropDown";
 // styles
 const headerStyle =
   "container max-w-[1224px] mx-auto flex justify-between items-center h-[4em] md:h-[7.188em] px-[1.25em]";
-const ulStyle = "flex items-center md:gap-x-5 lg:gap-x-6";
+const ulStyle = "flex flex-row-reverse items-center md:gap-x-5 lg:gap-x-6";
 const liStyle =
   "text-[#717171] text-sm lg:text-lg border-b border-[#ffffff00] py-1 duration-500";
 const liActiveStyle =
   "text-[#417F56] text-sm lg:text-lg border-b py-1 border-[#417F56] font-bold duration-500";
-const linkBoxStyle = "flex items-center gap-x-2.5 md:gap-x-[0.5em] justify-end";
+const linkBoxStyle = "flex flex-row-reverse items-center gap-x-2.5 md:gap-x-[0.5em] justify-end";
 const linkBoxItemStyle =
   "p-[0.25em] md:p-[0.5em] bg-[#E5F2E9] text-[#417F56] rounded md:rounded-md scale-[1.2] md:scale-100 relative duration-300";
 const linkBoxItemActiveStyle =
@@ -46,6 +46,7 @@ const Header = () => {
 
   const navigate = useNavigate();
 
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -55,50 +56,10 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky top-0 z-10 bg-white shadow-md">
+    <div className="sticky top-0 z-10 bg-white shadow-md " >
       <header className={headerStyle}>
-        <div className="md:hidden">
-          <MobileMenu />
-        </div>
-
-        <div>
-          <span className="md:hidden">{logo}</span>
-          <span className="hidden md:block md:scale-[.8] lg:scale-100">
-            {logoDesktop}
-          </span>
-        </div>
-
-        <div className="hidden md:block">
-          <ul className={ulStyle}>
-            {navigation.map((item) =>
-              item.href === "#" ? (
-                <MenuDropDown
-                  options={item.options}
-                  key={item.name}
-                  className={`${liStyle}`}
-                  type="header"
-                >
-                  {item.name}
-                </MenuDropDown>
-              ) : (
-                <NavItem
-                  key={item.name}
-                  link={item.href}
-                  className={
-                    window.location.href.includes(item.href)
-                      ? liActiveStyle
-                      : liStyle
-                  }
-                >
-                  {item.name}
-                </NavItem>
-              ),
-            )}
-          </ul>
-        </div>
-
         <div className={linkBoxStyle}>
-          <button className={`${linkBoxItemStyle} hidden md:block`}>
+          <button className={`${linkBoxItemStyle} hidden md:block `}>
             {searchIcon}
           </button>
 
@@ -135,6 +96,44 @@ const Header = () => {
             <span className="hidden md:block">{userIconDesktop}</span>
           </button>
           <SignUp isOpen={isOpen} closeModal={closeModal} />
+        </div>
+
+        <div className="hidden md:block">
+          <ul className={ulStyle} >
+            {navigation.map((item) =>
+              item.href === "#" ? (
+                <MenuDropDown
+                  options={item.options}
+                  key={item.name}
+                  className={`${liStyle}`}
+                  type="header"
+                >
+                  {item.name}
+                </MenuDropDown>
+              ) : (
+                <NavItem
+                  key={item.name}
+                  link={item.href}
+                  className={
+                    window.location.href.includes(item.href)
+                      ? liActiveStyle
+                      : liStyle
+                  }
+                >
+                  {item.name}
+                </NavItem>
+              ),
+            )}
+          </ul>
+        </div>
+        <div>
+          <span className=" md:hidden">{logo}</span>
+          <span className="hidden md:block md:scale-[.8] lg:scale-100">
+            {logoDesktop}
+          </span>
+        </div>
+        <div className="md:hidden">
+          <MobileMenu />
         </div>
       </header>
     </div>

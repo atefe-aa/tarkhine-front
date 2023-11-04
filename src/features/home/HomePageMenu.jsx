@@ -23,7 +23,7 @@ const HomePageMenu = () => {
         </div>
       </div>
 
-      <h3 className="mb-3 font-bold text-[#353535] md:mb-5 md:mt-12 md:text-xl lg:mb-8 lg:text-2xl">
+      <h3 className="mb-3 text-center font-bold text-[#353535] md:mb-5 md:mt-12 md:text-xl lg:mb-8 lg:text-2xl">
         منوی رستوران
       </h3>
 

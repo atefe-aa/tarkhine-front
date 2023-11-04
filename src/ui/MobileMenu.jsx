@@ -22,7 +22,7 @@ const logoMobileStyle = "absolute right-4 top-6 sm:top-8";
 const ulStyle =
   "text-right flex flex-col gap-y-2 min-h-[calc(100vh_-_70px)] sm:min-h-[calc(100vh_-_94px)] bg-white w-[12em] sm:w-[16em] px-4 py-2";
 const liStyle =
-  "flex items-center gap-x-2 text-[#353535] text-xs sm:text-sm border-b border-[#CBCBCB] pb-2";
+  "text-right flex items-center gap-x-2 text-[#353535] text-xs sm:text-sm border-b border-[#CBCBCB] pb-2";
 const liActiveStyle =
   "flex items-center gap-x-2 text-[#417F56] font-semibold text-xs sm:text-sm border-b border-[#CBCBCB] pb-2";
 
