@@ -52,9 +52,9 @@ const Introduction = () => {
           </p>
           <div className={buttonBoxStyle}>
             <Link to='/about' className={buttonStyle}>
-              <span className={buttonSpanStyle}>اطلاعات بیشتر</span>
               <span className="md:hidden">{arrowLeftIcon}</span>
               <span className="hidden md:block">{arrowLeftDesktopIcon}</span>
+              <span className={buttonSpanStyle}>اطلاعات بیشتر</span>
             </Link>
           </div>
         </div>
