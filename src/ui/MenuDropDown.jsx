@@ -45,9 +45,9 @@ function MenuDropDown({ children, options, className, type = "menu" }) {
 
   return (
     <>
-      <li className={`${className} cursor-pointer`} onClick={handleClick}>
+      <li className={`${className} cursor-pointer items-center flex`} onClick={handleClick}>
+        <span className="inline-flex mr-2">{arrowDownIcon}</span>
         {children}
-        <span>{arrowDownIcon}</span>
       </li>
       {isOpen &&
         (isLoading || isLoadingCategories ? (

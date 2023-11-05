@@ -20,7 +20,7 @@ const closeIconStyle =
   "absolute top-[18px] right-[9.5em] sm:right-[13.5em] text-white";
 const logoMobileStyle = "absolute right-4 top-6 sm:top-8";
 const ulStyle =
-  "text-right flex flex-col gap-y-2 min-h-[calc(100vh_-_70px)] sm:min-h-[calc(100vh_-_94px)] bg-white w-[12em] sm:w-[16em] px-4 py-2";
+  "text-right flex  flex-col gap-y-2 min-h-[calc(100vh_-_70px)] sm:min-h-[calc(100vh_-_94px)] bg-white w-[12em] sm:w-[16em] px-4 py-2";
 const liStyle =
   "text-right flex items-center gap-x-2 text-[#353535] text-xs sm:text-sm border-b border-[#CBCBCB] pb-2";
 const liActiveStyle =
