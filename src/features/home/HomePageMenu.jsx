@@ -1,19 +1,16 @@
-import HomePageMenuItem from "./HomePageMenuItem";
+import ReactLoading from "react-loading";
 
 // icons
 import { searchIcon } from "../../icons/homePageIcons";
 
-// images
-import Maincourse from "../../images/main-course.png";
-import Appetizer from "../../images/appetizer.png";
-import Dessert from "../../images/dessert.png";
-import Drink from "../../images/drink.png";
-import { Link } from "react-router-dom";
-
 // styles
 import { searchBoxStyle, inputSearchStyle } from "../../ui/SearchProduct";
+import { useMainCategories } from "../categories/useMainCategories";
+import CategoryItem from "./CategoryItem";
 
-const HomePageMenu = () => {
+function HomePageMenu() {
+  const { isLoading, categories } = useMainCategories();
+
   return (
     <div className="container mx-auto mt-4 max-w-[1224px] text-center ">
       <div className="px-5 md:hidden">
@@ -27,26 +24,24 @@ const HomePageMenu = () => {
         منوی رستوران
       </h3>
 
-      <div className="flex flex-col justify-center gap-y-10 md:flex-row">
-        <div className="flex items-center justify-center">
-          <Link to="/menu">
-            <HomePageMenuItem image={Maincourse} title={"غذای اصلی"} />
-          </Link>
-          <Link to="/menu">
-            <HomePageMenuItem image={Appetizer} title={"پیش غذا"} />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center">
-          <Link to="/menu">
-            <HomePageMenuItem image={Dessert} title={"دسر"} />
-          </Link>
-          <Link to="/menu">
-            <HomePageMenuItem image={Drink} title={"نوشیدنی"} />
-          </Link>
+      <div className="flex flex-col justify-center md:flex-row">
+        <div className="flex flex-wrap justify-center">
+          {isLoading ? (
+            <ReactLoading
+              type="bubbles"
+              color="#417F56"
+              height={60}
+              width={60}
+            />
+          ) : (
+            categories.map((category) => (
+              <CategoryItem category={category} key={category.id} />
+            ))
+          )}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default HomePageMenu;

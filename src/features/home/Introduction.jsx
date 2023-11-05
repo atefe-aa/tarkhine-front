@@ -14,6 +14,7 @@ import {
   menuBoardDesktopIcon,
   arrowLeftDesktopIcon,
 } from "../../icons/introductionIcons";
+import { Link } from "react-router-dom";
 
 // styles
 const bgStyle =
@@ -50,11 +51,11 @@ const Introduction = () => {
             شان شما عزیزان ارائه دهیم.
           </p>
           <div className={buttonBoxStyle}>
-            <button className={buttonStyle}>
+            <Link to='/about' className={buttonStyle}>
               <span className={buttonSpanStyle}>اطلاعات بیشتر</span>
               <span className="md:hidden">{arrowLeftIcon}</span>
               <span className="hidden md:block">{arrowLeftDesktopIcon}</span>
-            </button>
+            </Link>
           </div>
         </div>
 
