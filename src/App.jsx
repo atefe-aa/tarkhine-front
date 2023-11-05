@@ -14,6 +14,7 @@ import BranchApply from "./pages/BranchApply";
 import FAQ from "./pages/FAQ";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Search from "./pages/Search";
 
 function App() {
   const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ function App() {
           <Route element={<Applayout />}>
             <Route index element={<Navigate replace to="home" />} />
             <Route path="home" element={<Home />} />
+            <Route path="search" element={<Search />} />
             <Route path="about" element={<About />} />
             <Route path="privacy" element={<Privacy />} />
             <Route path="branch/:branchId" element={<Branch />} />

@@ -59,9 +59,9 @@ const Header = () => {
     <div className="sticky top-0 z-10 bg-white shadow-md " >
       <header className={headerStyle}>
         <div className={linkBoxStyle}>
-          <button className={`${linkBoxItemStyle} hidden md:block `}>
+          <Link to="/search" className={`${linkBoxItemStyle} hidden md:block `}>
             {searchIcon}
-          </button>
+          </Link>
 
           <Link
             to="/cart"
