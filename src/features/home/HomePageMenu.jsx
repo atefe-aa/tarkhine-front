@@ -1,12 +1,9 @@
 import ReactLoading from "react-loading";
 
-// icons
-import { searchIcon } from "../../icons/homePageIcons";
-
 // styles
-import { searchBoxStyle, inputSearchStyle } from "../../ui/SearchProduct";
 import { useMainCategories } from "../categories/useMainCategories";
 import CategoryItem from "./CategoryItem";
+import SearchForm from "../search/SearchForm";
 
 function HomePageMenu() {
   const { isLoading, categories } = useMainCategories();
@@ -14,10 +11,7 @@ function HomePageMenu() {
   return (
     <div className="container mx-auto mt-4 max-w-[1224px] text-center ">
       <div className="px-5 md:hidden">
-        <div className={searchBoxStyle}>
-          <input type="text" placeholder="جستجو" className={inputSearchStyle} />
-          <span>{searchIcon}</span>
-        </div>
+        <SearchForm  />
       </div>
 
       <h3 className="mb-3 text-center font-bold text-[#353535] md:mb-5 md:mt-12 md:text-xl lg:mb-8 lg:text-2xl">

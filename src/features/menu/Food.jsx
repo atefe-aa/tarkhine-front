@@ -1,9 +1,8 @@
-
-import ReactStars from "react-rating-stars-component";
+// import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 // import showToast from "../helper/showToast";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 
 // functions
 import { convertToFa, isInCart, isInFavorite } from "../../utils/functions";
@@ -20,6 +19,7 @@ import {
   starDesktopIcon,
   starEmptyDesktopIcon,
 } from "../../icons/foodsPageIcons";
+import RatingStars from "../../ui/RatingStars";
 
 // styles
 const foodBoxStyle =
@@ -40,7 +40,8 @@ const descriptionStyle = "hidden sm:block text-[10.25px] lg:text-sm";
 const discountedDivStyle =
   "flex items-center gap-x-2 font-medium lg:relative lg:top-6 ";
 const footerDivStyle = "flex items-center justify-between";
-const likeStyle = "mt-0.5 lg:absolute lg:left-4 lg:top-4 scale-[1.1] lg:scale-[1.5]";
+const likeStyle =
+  "mt-0.5 lg:absolute lg:left-4 lg:top-4 scale-[1.1] lg:scale-[1.5]";
 const ratingDivStyle = "flex items-center gap-x-1";
 const buttonStyle =
   "bg-[#417F56] text-white border border-[#417F56] rounded sm:rounded-md text-[10px] py-1.5 px-2 sm:p-[9px] font-medium lg:rounded lg:text-sm lg:px-5 xl:px-12 ";
@@ -63,10 +64,10 @@ const Food = ({ productData }) => {
   const { title, price, offer, discountedPrice, description, image, slug, id } =
     productData;
 
-  const state = useSelector((state) => state.cartState);
-  const favorite = useSelector((state) => state.favoriteState);
-  const isLoggedIn = useSelector((state) => state.authState.isLoggedIn);
-  const dispatch = useDispatch();
+  // const state = useSelector((state) => state.cartState);
+  // const favorite = useSelector((state) => state.favoriteState);
+  // const isLoggedIn = useSelector((state) => state.authState.isLoggedIn);
+  // const dispatch = useDispatch();
 
   const likeItem = () => {
     // if (isLoggedIn) {
@@ -91,7 +92,7 @@ const Food = ({ productData }) => {
       <Link to={`/menu/${slug}`}>
         <img src={image} alt={title} className={foodImgStyle} />
       </Link>
-      <div className="p-2 flex-1 lg:px-3 lg:py-0">
+      <div className="flex-1 p-2 lg:px-3 lg:py-0">
         <div className={headerDivStyle}>
           <span className={titleStyle}>
             <Link to={`/menu/${slug}`}>{title}</Link>
@@ -114,39 +115,24 @@ const Food = ({ productData }) => {
 
         <div className={footerDivStyle}>
           <div className={ratingDivStyle}>
-            {isInFavorite(favorite, id) && isLoggedIn ? (
-              <button
-                className={`${likeStyle} !scale-[1.2] lg:!scale-[1.65]`}
-                // onClick={() => dispatch(dislikeItem(productData))}
-              >
-                {likeRedIcon}
-              </button>
-            ) : (
-              <button className={likeStyle} onClick={likeItem}>
-                {likeIcon}
-              </button>
-            )}
+            <button
+              className={`${likeStyle} !scale-[1.2] lg:!scale-[1.65]`}
+              // onClick={() => dispatch(dislikeItem(productData))}
+            >
+              {likeRedIcon}
+            </button>
 
             <div className="hidden sm:block lg:hidden">
-              <ReactStars {...rating} />
+              <RatingStars />
             </div>
             <div className="hidden lg:block">
-              <ReactStars {...ratingDesktop} />
+              <RatingStars />
             </div>
           </div>
-          {isInCart(state, id) && isLoggedIn ? (
-            <Link to="/cart">
-              <button
-                className={`${buttonStyle} !bg-white !text-[#417F56] border-[#417F56] px-[11px] lg:text-sm lg:px-[22px] xl:px-[51px]`}
-              >
-                مشاهده سبد خرید
-              </button>
-            </Link>
-          ) : (
-            <button className={buttonStyle} onClick={addToCart}>
-              افزودن به سبد خرید
-            </button>
-          )}
+
+          <button className={buttonStyle} onClick={addToCart}>
+            افزودن به سبد خرید
+          </button>
         </div>
       </div>
     </div>

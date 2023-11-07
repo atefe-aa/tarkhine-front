@@ -1,9 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
-import { search } from "../../services/apiFoods";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { search as searchApi } from "../../services/apiFoods";
+import toast from "react-hot-toast";
 
-export function useSearch({ query }) {
-  const { data, isLoading, error } = useQuery({
-    queryFn: () => search({ query }),
+export function useSearch() {
+  const queryClient = useQueryClient();
+
+  const {
+    isLoading: isSearching,
+    mutate: search,
+    data: searchResults,
+  } = useMutation({
+    mutationFn: searchApi,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["searchResults"], data);
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+    retry: true,
   });
-  return { data, isLoading, error };
+  return { isSearching, search, searchResults };
 }
