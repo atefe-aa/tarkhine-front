@@ -1,8 +1,9 @@
 import DropDownItem from "./DropDownItem";
 
-function DropDown({ options, baseLink = "", position }) {
+function DropDown({ options, baseLink = "", position, onClick }) {
   return (
     <div
+    onClick={onClick}
       className="inline-flex h-40 w-36 flex-col items-center justify-center shadow"
       style={{
         position: "fixed",

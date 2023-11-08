@@ -12,21 +12,21 @@ function MenuDropDown({ children, options, className, type = "menu" }) {
   const { isLoading, branches } = useBranches();
   const { isLoading: isLoadingCategories, categories } = useMainCategories();
 
-  if (isLoading || isLoadingCategories) return;
+  if (isLoading || isLoadingCategories || !branches || !categories) return;
 
   let proOptions;
-  if (options === "branches") {
-    proOptions = branches.map((branch) => ({
+  if (options === "branch") {
+    proOptions = branches?.map((branch) => ({
       id: branch.id,
       name: branch.name,
-      href: `/branch/${branch.id}`,
+      href: `branch/${branch.id}`,
     }));
   }
   if (options === "categories") {
-    proOptions = categories.map((category) => ({
+    proOptions = categories?.map((category) => ({
       id: category.id,
       name: category.name,
-      href: `/categories/${category.id}`,
+      href: `categories/${category.id}`,
     }));
   }
 
@@ -45,15 +45,18 @@ function MenuDropDown({ children, options, className, type = "menu" }) {
 
   return (
     <>
-      <li className={`${className} cursor-pointer items-center flex`} onClick={handleClick}>
-        <span className="inline-flex mr-2">{arrowDownIcon}</span>
+      <li
+        className={`${className} flex cursor-pointer items-center`}
+        onClick={handleClick}
+      >
+        <span className="mr-2 inline-flex">{arrowDownIcon}</span>
         {children}
       </li>
       {isOpen &&
         (isLoading || isLoadingCategories ? (
           <ReactLoading type="bubbles" color="#417F56" height={60} width={60} />
         ) : type === "menu" ? (
-          proOptions.map((option) => (
+          proOptions?.map((option) => (
             <ListDropDownItem
               key={option.name}
               option={option}
@@ -62,6 +65,7 @@ function MenuDropDown({ children, options, className, type = "menu" }) {
           ))
         ) : (
           <DropDown
+            onClick={() => setIsOpen(false)}
             position={position}
             options={proOptions}
             baseLink={options}

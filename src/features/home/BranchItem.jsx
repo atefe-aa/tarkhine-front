@@ -23,16 +23,19 @@ function BranchItem({ branch }) {
   }
 
   return (
-    <div onClick={() => handleClick()} className={`${branchesBoxStyle} ${showButton ? "border-[#417F56] shadow-md" : "border-[#CBCBCB]"}`}>
+    <div
+      onClick={() => handleClick()}
+      className={`${branchesBoxStyle} ${
+        showButton ? "border-[#417F56] shadow-md" : "border-[#CBCBCB]"
+      }`}
+    >
       <div
         style={{ "--image-url": `url(${branch.pictures[0]})` }}
         className={coverStyle}
       ></div>
       <div className={descriptionBoxStyle}>
-        <h4 className={h4Style}>شعبه اکباتان</h4>
-        <p className={pStyle}>
-          شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم
-        </p>
+        <h4 className={h4Style}>{branch.name}</h4>
+        <p className={pStyle}>{branch.address}</p>
         {showButton && (
           <Button link={`/branch/${branch.id}`} className="hidden md:flex">
             <span className="md:hidden">{arrowLeftIcon}</span>

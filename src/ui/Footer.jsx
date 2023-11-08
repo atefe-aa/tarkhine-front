@@ -33,11 +33,10 @@ const buttonStyle =
 
 const Footer = () => {
   const { isLoading, branches } = useBranches();
-
   return (
     <footer
-      style={{ "--image-url": `url(${footerImg})` }}
-      className={footerStyle}
+    style={{ "--image-url": `url(${footerImg})` }}
+    className={footerStyle}
     >
       <div className={containerStyle}>
         <div>
@@ -52,6 +51,7 @@ const Footer = () => {
             <Link to="/privacy">
               <li className={liStyle}>حریم خصوصی</li>
             </Link>
+    
             <div className={`${iconBoxStyle} flex md:hidden`}>
               <span>{twitterIcon}</span>
               <span>{instagramIcon}</span>
@@ -73,23 +73,12 @@ const Footer = () => {
               height={60}
               width={60}
             /> : <ul className={ulStyle}>
-            {branches.map((branch) => (
+            {branches && branches.map((branch) => (
               <ListItem key={branch.id} className={liStyle} link="/contact">
                 {branch.name}
               </ListItem>
             ))}
-            {/* <li className={liStyle}>
-              <Link to="/contact">شعبه اکباتان</Link>
-            </li>
-            <li className={liStyle}>
-              <Link to="/contact">شعبه چالوس</Link>
-            </li>
-            <li className={liStyle}>
-              <Link to="/contact">شعبه اقدسیه</Link>
-            </li>
-            <li className={liStyle}>
-              <Link to="/contact">شعبه ونک</Link>
-            </li> */}
+          
           </ul>
 }
          

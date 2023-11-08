@@ -12,7 +12,7 @@ export const navigation = [
   {
     name: "شعبه",
     href: "#",
-    options: "branches",
+    options: "branch",
     icon: hashtagIcon,
   },
   {

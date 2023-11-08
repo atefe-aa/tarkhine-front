@@ -16,8 +16,16 @@ const Branches = () => {
 
       <div className="md:flex md:gap-x-4 lg:gap-x-5 xl:gap-x-6">
         {isLoading ? (
-          <ReactLoading type="bubbles" color="#417F56" height={60} width={60} />
+          <div className="flex justify-center">
+            <ReactLoading
+              type="bubbles"
+              color="#417F56"
+              height={60}
+              width={60}
+            />
+          </div>
         ) : (
+          branches !== null &&
           branches.map((branch) => (
             <BranchItem branch={branch} key={branch.id} />
           ))
