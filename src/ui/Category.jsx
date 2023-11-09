@@ -8,11 +8,11 @@ export const categoryBoxStyle =
 export const categoryItemStyle =
   "flex items-center rounded-[10px] gap-x-1 px-2 py-1.5 bg-[#EDEDED] text-[#353535] md:py-2 lg:px-3 md:rounded-full duration-300 cursor-pointer";
 
-const Category = ({ selectedCategory, setSelectedCategory }) => {
+const Category = ({ allCategories, selectedCategory, setSelectedCategory }) => {
   return (
     <RadioGroup
       value={selectedCategory}
-      onChange={setSelectedCategory}
+      onChange={(e)=>setSelectedCategory(e)}
       className={categoryBoxStyle}
     >
       <RadioGroup.Option value="all">
@@ -29,66 +29,22 @@ const Category = ({ selectedCategory, setSelectedCategory }) => {
           </span>
         )}
       </RadioGroup.Option>
-
-      <RadioGroup.Option value="غذاهای ایرانی">
-        {({ checked }) => (
-          <span
-            className={
-              checked
-                ? `${categoryItemStyle} !bg-[#E5F2E9] !text-[#417F56]`
-                : categoryItemStyle
-            }
-          >
-            <span className="w-[67px]">غذاهای ایرانی</span>
-            <span>{arrowLeftIcon}</span>
-          </span>
-        )}
-      </RadioGroup.Option>
-
-      <RadioGroup.Option value="غذاهای غیر ایرانی">
-        {({ checked }) => (
-          <span
-            className={
-              checked
-                ? `${categoryItemStyle} !bg-[#E5F2E9] !text-[#417F56]`
-                : categoryItemStyle
-            }
-          >
-            <span className="w-[86px]">غذاهای غیر ایرانی</span>
-            <span>{arrowLeftIcon}</span>
-          </span>
-        )}
-      </RadioGroup.Option>
-
-      <RadioGroup.Option value="پیتزاها">
-        {({ checked }) => (
-          <span
-            className={
-              checked
-                ? `${categoryItemStyle} !bg-[#E5F2E9] !text-[#417F56]`
-                : categoryItemStyle
-            }
-          >
-            <span>پیتزاها</span>
-            <span>{arrowLeftIcon}</span>
-          </span>
-        )}
-      </RadioGroup.Option>
-
-      <RadioGroup.Option value="ساندویچ‌ها">
-        {({ checked }) => (
-          <span
-            className={
-              checked
-                ? `${categoryItemStyle} !bg-[#E5F2E9] !text-[#417F56]`
-                : categoryItemStyle
-            }
-          >
-            <span>ساندویچ‌ها</span>
-            <span>{arrowLeftIcon}</span>
-          </span>
-        )}
-      </RadioGroup.Option>
+      {allCategories.map((cat) => (
+        <RadioGroup.Option key={cat.id} value={cat.id}>
+          {({ checked }) => (
+            <span
+              className={
+                checked
+                  ? `${categoryItemStyle} !bg-[#E5F2E9] !text-[#417F56]`
+                  : categoryItemStyle
+              }
+            >
+              <span className="w-[67px]">{cat.name}</span>
+              <span>{arrowLeftIcon}</span>
+            </span>
+          )}
+        </RadioGroup.Option>
+      ))}
     </RadioGroup>
   );
 };

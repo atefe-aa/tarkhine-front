@@ -23,7 +23,7 @@ RatingStars.propTypes = {
 
 export default function RatingStars({
   maxRating = 5,
-  messages = "",
+  // messages = "",
   color = "#fcc419",
   size = "48",
   className = "",
@@ -33,12 +33,12 @@ export default function RatingStars({
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
-  const textStyle = {
-    lineHeight: "1",
-    margine: "0",
-    color,
-    fontSize: `${size / 1.5}px`,
-  };
+  // const textStyle = {
+  //   lineHeight: "1",
+  //   margine: "0",
+  //   color,
+  //   fontSize: `${size / 1.5}px`,
+  // };
 
   function handleRating(rating) {
     setRating(rating);
@@ -60,11 +60,11 @@ export default function RatingStars({
           />
         ))}
       </div>
-      <p style={textStyle}>
+      {/* <p style={textStyle}>
         {messages.length === maxRating
           ? messages[tempRating ? tempRating - 1 : rating - 1]
           : tempRating || rating || ""}
-      </p>
+      </p> */}
     </div>
   );
 }

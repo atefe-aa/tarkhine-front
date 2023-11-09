@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import FoodCard from "../features/menu/FoodCard";
 import SearchForm from "../features/search/SearchForm";
 import { useSearchResults } from "../features/search/useSearchResults";
@@ -6,6 +7,10 @@ import ReactLoading from "react-loading";
 
 function Search() {
   const { isLoading, searchResults } = useSearchResults();
+
+  useEffect(() => {
+    document.title = ` ترخینه | جست و جو`;
+  }, []);
 
   return (
     <div>
@@ -29,7 +34,7 @@ function Search() {
       <div className="flex justify-center">
         <SearchForm />
       </div>
-      <div className="flex justify-center mb-10">
+      <div className="mb-10 flex justify-center">
         {isLoading ? (
           <ReactLoading
             type="bubbles"

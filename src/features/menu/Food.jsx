@@ -1,14 +1,7 @@
-// import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
-// import { useSelector, useDispatch } from "react-redux";
-// import showToast from "../helper/showToast";
-// import "react-toastify/dist/ReactToastify.css";
 
 // functions
-import { convertToFa, isInCart, isInFavorite } from "../../utils/functions";
-
-// Actions
-// import { dislikeItem } from "../redux/favorite/favoriteAction";
+import { convertToFa } from "../../utils/functions";
 
 // icons
 import {
@@ -19,7 +12,10 @@ import {
   starDesktopIcon,
   starEmptyDesktopIcon,
 } from "../../icons/foodsPageIcons";
-import RatingStars from "../../ui/RatingStars";
+import RatingStars from "../food-rating/RatingStars";
+import { useFoodRating } from "../food-rating/useFoodRating";
+import { useFavorites } from "../favorites/useFavorites";
+import { useUpdateFavorites } from "../favorites/useUpdateFavorites";
 
 // styles
 const foodBoxStyle =
@@ -61,22 +57,20 @@ export const ratingDesktop = {
 };
 
 const Food = ({ productData }) => {
-  const { title, price, offer, discountedPrice, description, image, slug, id } =
+  const { name, price, discount, description, pictures, id, rating } =
     productData;
+  const discountedPrice = price - (price * discount) / 100;
+  const { isPending, addRating } = useFoodRating();
+  const { favorites, isLoading } = useFavorites();
+  const { isPending: isPendingLike, updateFavorites } = useUpdateFavorites();
 
-  // const state = useSelector((state) => state.cartState);
-  // const favorite = useSelector((state) => state.favoriteState);
-  // const isLoggedIn = useSelector((state) => state.authState.isLoggedIn);
-  // const dispatch = useDispatch();
-
-  const likeItem = () => {
+  function likeItem() {
     // if (isLoggedIn) {
-    //   dispatch({ type: "LIKE_ITEM", payload: productData });
-    //   showToast("محصول به علاقه‌مندی ها اضافه شد", "success");
+    updateFavorites(id);
     // } else {
-    //   showToast("شما ابتدا باید وارد شوید", "error");
+    //   toast.error("شما ابتدا باید وارد شوید");
     // }
-  };
+  }
 
   const addToCart = () => {
     // if (isLoggedIn) {
@@ -87,25 +81,29 @@ const Food = ({ productData }) => {
     // }
   };
 
+  function onStarRating(rating) {
+    addRating({ rating, food_id: id });
+  }
+
   return (
     <div className={foodBoxStyle}>
-      <Link to={`/menu/${slug}`}>
-        <img src={image} alt={title} className={foodImgStyle} />
+      <Link to={`/menu`}>
+        <img src={pictures[0]} alt={name} className={foodImgStyle} />
       </Link>
       <div className="flex-1 p-2 lg:px-3 lg:py-0">
         <div className={headerDivStyle}>
           <span className={titleStyle}>
-            <Link to={`/menu/${slug}`}>{title}</Link>
+            <Link to={`/menu`}>{name}</Link>
           </span>
           <div className={priceDivStyle}>
             <span className={priceStyle}>{convertToFa(price)}</span>
-            <span className={offerStyle}>%{convertToFa(offer)}</span>
+            <span className={offerStyle}>%{convertToFa(discount)}</span>
           </div>
         </div>
 
         <div className={containerDivStyle}>
           <span className={descriptionStyle}>
-            <Link to={`/menu/${slug}`}>{description.slice(0, 25)}...</Link>
+            <Link to={`/menu`}>{description.slice(0, 25)}...</Link>
           </span>
           <div className={discountedDivStyle}>
             <span>{convertToFa(discountedPrice)}</span>
@@ -117,16 +115,30 @@ const Food = ({ productData }) => {
           <div className={ratingDivStyle}>
             <button
               className={`${likeStyle} !scale-[1.2] lg:!scale-[1.65]`}
-              // onClick={() => dispatch(dislikeItem(productData))}
+              onClick={likeItem}
             >
-              {likeRedIcon}
+              {(!isLoading || !isPendingLike) && favorites?.data?.includes(id)
+                ? likeRedIcon
+                : likeIcon}
             </button>
 
-            <div className="hidden sm:block lg:hidden">
-              <RatingStars />
+            <div
+              className={`sm:block lg:hidden ${isPending ? " opacity-50" : ""}`}
+            >
+              <RatingStars
+                onStarRating={onStarRating}
+                defaultRating={rating.stars}
+                size={20}
+              />
             </div>
-            <div className="hidden lg:block">
-              <RatingStars />
+            <div
+              className={`hidden lg:block ${isPending ? " opacity-50" : ""}`}
+            >
+              <RatingStars
+                onStarRating={onStarRating}
+                defaultRating={rating.stars}
+                size={30}
+              />
             </div>
           </div>
 

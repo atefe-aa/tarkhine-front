@@ -11,7 +11,7 @@ const h3Style =
 const Branches = () => {
   const { isLoading, branches } = useBranches();
   return (
-    <div className={containerStyle}>
+    <div className={containerStyle} id="branches">
       <h3 className={h3Style}>ترخینه گردی</h3>
 
       <div className="md:flex md:gap-x-4 lg:gap-x-5 xl:gap-x-6">

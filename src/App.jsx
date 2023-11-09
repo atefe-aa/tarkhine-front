@@ -35,7 +35,7 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path="contact" element={<Contact />} />
             <Route path="FAQ" element={<FAQ />} />
-            <Route path="menu" element={<Menu />} />
+            <Route path="menu/:branchId" element={<Menu />} />
             <Route path="paymentStatus" element={<PaymentStatus />} />
             <Route path="policies" element={<Policies />} />
             <Route path="profile" element={<Profile />} />
@@ -57,8 +57,8 @@ function App() {
               fontSize: "16px",
               maxWidth: "500px",
               padding: "16px 24px",
-              backgroundColor: "#353535",
-              color: "#757575",
+              backgroundColor:"#eeebeb" ,
+              color: "#353535",
             },
           }}
         />

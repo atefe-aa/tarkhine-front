@@ -66,3 +66,26 @@ export async function getMenuByCategory({branchId, categoryId}) {
     throw new Error("somthing went wrong fetching menu");
   }
 }
+
+
+
+export async function getBranchMenu({branchId}) {
+  try {
+    const res = await fetch(`${BASE_URL}/${branchId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    if (!res.ok) throw new Error("Somthing went wrong fetching menu!");
+
+    const data = await res.json();
+
+    if (data.error) throw new Error(data.error);
+
+    return data.data;
+  } catch (e) {
+    console.error(e);
+    throw new Error("somthing went wrong fetching menu");
+  }
+}
