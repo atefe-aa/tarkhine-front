@@ -5,8 +5,6 @@ import { convertToFa } from "../../utils/functions";
 
 // icons
 import {
-  likeIcon,
-  likeRedIcon,
   starIcon,
   starEmptyIcon,
   starDesktopIcon,
@@ -14,8 +12,7 @@ import {
 } from "../../icons/foodsPageIcons";
 import RatingStars from "../food-rating/RatingStars";
 import { useFoodRating } from "../food-rating/useFoodRating";
-import { useFavorites } from "../favorites/useFavorites";
-import { useUpdateFavorites } from "../favorites/useUpdateFavorites";
+import Favorite from "../favorites/Favorite";
 
 // styles
 const foodBoxStyle =
@@ -61,16 +58,7 @@ const Food = ({ productData }) => {
     productData;
   const discountedPrice = price - (price * discount) / 100;
   const { isPending, addRating } = useFoodRating();
-  const { favorites, isLoading } = useFavorites();
-  const { isPending: isPendingLike, updateFavorites } = useUpdateFavorites();
-
-  function likeItem() {
-    // if (isLoggedIn) {
-    updateFavorites(id);
-    // } else {
-    //   toast.error("شما ابتدا باید وارد شوید");
-    // }
-  }
+ 
 
   const addToCart = () => {
     // if (isLoggedIn) {
@@ -113,14 +101,10 @@ const Food = ({ productData }) => {
 
         <div className={footerDivStyle}>
           <div className={ratingDivStyle}>
-            <button
+            <Favorite
               className={`${likeStyle} !scale-[1.2] lg:!scale-[1.65]`}
-              onClick={likeItem}
-            >
-              {(!isLoading || !isPendingLike) && favorites?.data?.includes(id)
-                ? likeRedIcon
-                : likeIcon}
-            </button>
+              foodId={id}
+            />
 
             <div
               className={`sm:block lg:hidden ${isPending ? " opacity-50" : ""}`}

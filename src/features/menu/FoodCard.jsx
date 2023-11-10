@@ -1,8 +1,9 @@
 import { likeIcon, starIcon } from "../../icons/foodsPageIcons";
 import { convertToFa } from "../../utils/functions";
+import Favorite from "../favorites/Favorite";
 
 function FoodCard({ foodData }) {
-  const { discount, name, pictures, price, rating, status } = foodData;
+  const { discount, name, pictures, price, rating, status, id } = foodData;
 
   return (
     <div
@@ -51,7 +52,9 @@ function FoodCard({ foodData }) {
             </div>
             <div className="flex h-4 w-4 items-center justify-center">
               <div className="inline-flex h-4 w-4 items-center justify-center">
-                <div className="relative h-4 w-4">{likeIcon}</div>
+                <div className="relative h-4 w-4">
+                  <Favorite foodId={id} />
+                </div>
               </div>
             </div>
           </div>
