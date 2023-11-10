@@ -13,6 +13,7 @@ import {
 import RatingStars from "../food-rating/RatingStars";
 import { useFoodRating } from "../food-rating/useFoodRating";
 import Favorite from "../favorites/Favorite";
+import AddToCartButton from "../cart/AddToCartButton";
 
 // styles
 const foodBoxStyle =
@@ -58,16 +59,6 @@ const Food = ({ productData }) => {
     productData;
   const discountedPrice = price - (price * discount) / 100;
   const { isPending, addRating } = useFoodRating();
- 
-
-  const addToCart = () => {
-    // if (isLoggedIn) {
-    //   dispatch({ type: "ADD_ITEM", payload: productData });
-    //   showToast("محصول به سبد خرید اضافه شد", "success");
-    // } else {
-    //   showToast("شما ابتدا باید وارد شوید", "error");
-    // }
-  };
 
   function onStarRating(rating) {
     addRating({ rating, food_id: id });
@@ -126,9 +117,7 @@ const Food = ({ productData }) => {
             </div>
           </div>
 
-          <button className={buttonStyle} onClick={addToCart}>
-            افزودن به سبد خرید
-          </button>
+          <AddToCartButton className={buttonStyle} foodId={id} />
         </div>
       </div>
     </div>

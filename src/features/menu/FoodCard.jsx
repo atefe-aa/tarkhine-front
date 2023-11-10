@@ -1,5 +1,6 @@
-import { likeIcon, starIcon } from "../../icons/foodsPageIcons";
+import { starIcon } from "../../icons/foodsPageIcons";
 import { convertToFa } from "../../utils/functions";
+import AddToCartButton from "../cart/AddToCartButton";
 import Favorite from "../favorites/Favorite";
 
 function FoodCard({ foodData }) {
@@ -73,7 +74,7 @@ function FoodCard({ foodData }) {
       <div className="inline-flex h-7 items-center justify-center self-stretch md:h-10">
         <div className="flex h-7 shrink grow basis-0 items-center justify-center gap-2 rounded bg-[#417F56] py-2 md:h-10 md:px-4">
           <div className="leading-0 text-center text-xs capitalize text-white md:text-base md:font-medium md:leading-7">
-            افزودن به سبد خرید
+<AddToCartButton foodId={id} />
           </div>
         </div>
       </div>
