@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Banner from "../ui/Banner";
 import Category from "../ui/Category";
 import ReactLoading from "react-loading";
-import Food from "../features/menu/Food";
 import SearchProduct from "../features/search/SearchProducts";
 
 // images
@@ -20,6 +19,7 @@ import { useBranchMenu } from "../features/menu/useBranchMenu";
 import { useAllCategories } from "../features/categories/useAllCategories";
 import { useMainCategories } from "../features/categories/useMainCategories";
 import CartCounterIcon from "../features/cart/CartCounterIcon";
+import CategorySection from "../features/menu/CategorySection";
 
 const tabGroupStyle =
   "container max-w-[1224px] mx-auto flex items-center justify-start px-5 text-[13px] gap-x-4 mb-2 md:text-base";
@@ -29,8 +29,7 @@ const cartButtonStyle =
   "absolute left-5 -top-1.5 flex items-center gap-x-1 text-[#417F56] py-1.5 px-2 text-sm border border-[#417F56] rounded-md md:gap-x-2 md:px-7 md:text-base md:rounded lg:py-[7px] lg:px-7 xl:py-2 xl:px-8";
 export const mainContainerStyle =
   "mx-5 mb-6 grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-6 md:mb-11 ";
-const categoryTitleStyle =
-  "text-[#353535] font-bold text-lg md:col-span-2 md:text-xl xl:text-2xl";
+
 export const notFoundResultsStyle =
   "min-h-[calc(100vh_-_590px)] sm:min-h-[calc(100vh_-_670px)] text-[#353535] flex flex-col justify-center items-center gap-y-4 text-sm my-14 sm:mt-20 md:text-xl md:gap-y-8";
 
@@ -63,7 +62,20 @@ function Menu() {
   const { branchMenu, isLoading, error } = useBranchMenu();
   if (isLoading || isLoadingCategories || isLoadingMainCategories) return;
   const categorizedProducts = categorizeProducts(branchMenu);
-  let foundResults = false;
+
+  const categories = mainCategories.concat(allCategories);
+  const selectedCategoryName =
+    selectedCategory !== "all" &&
+    categories.filter((item) => item.id === selectedCategory)[0].name;
+
+  const searchedProducts =
+    searchText !== "" &&
+    branchMenu.filter((product) => product.name.includes(searchText));
+
+  const filteredProducts =
+    selectedCategory === "all"
+      ? categorizedProducts
+      : categorizedProducts[selectedCategory];
 
   return (
     <>
@@ -73,7 +85,11 @@ function Menu() {
       <div className="bg-[#EDEDED] text-[#717171]">
         <div className={tabGroupStyle}>
           {mainCategories.map((cat) => (
-            <button className={cat.id === 1 ? tabGroupItemStyle : ""} key={cat.id}>
+            <button
+              className={cat.id === 1 ? tabGroupItemStyle : ""}
+              onClick={() => setSelectedCategory(cat.id)}
+              key={cat.id}
+            >
               {" "}
               {cat.name}
             </button>
@@ -130,41 +146,27 @@ function Menu() {
         </>
       ) : error ? (
         <h2 className="h-screen">{error}</h2>
+      ) : searchText !== "" && searchedProducts ? (
+        <CategorySection
+          products={searchedProducts}
+          catName={`نتایج جست و جو برای "${searchText}":`}
+        />
+      ) : selectedCategory === "all" ? (
+        categories.map((cat) => (
+          <CategorySection
+            key={cat.id}
+            products={categorizedProducts[cat.id]}
+            catName={categories.filter((item) => item.id === cat.id)[0].name}
+          />
+        ))
       ) : (
-        Object.keys(categorizedProducts).map((category) => {
-          let catData;
-
-          allCategories.forEach((cat) => {
-            if (cat.id == category) {
-              catData = cat;
-              return;
-            }
-          });
-
-          const filteredProducts = categorizedProducts[category].filter(
-            (product) =>
-              (selectedCategory === "all" ||
-                product.categories[0] === selectedCategory) &&
-              product.name.includes(searchText),
-          );
-
-          if (filteredProducts.length > 0 && catData) {
-            foundResults = true;
-            return (
-              <div className="container mx-auto max-w-[1224px]" key={category}>
-                <div key={category} className={mainContainerStyle}>
-                  <h3 className={categoryTitleStyle}>{catData.name}</h3>
-                  {filteredProducts.map((product) => (
-                    <Food key={product.id} productData={product} />
-                  ))}
-                </div>
-              </div>
-            );
-          }
-          return null;
-        })
+        <CategorySection
+          products={filteredProducts}
+          catName={selectedCategoryName}
+        />
       )}
-      {!foundResults &&
+      {((searchText !== "" && searchedProducts.length === 0) ||
+        (selectedCategory !== "all" && filteredProducts.length === 0)) &&
         !isLoading &&
         !isLoadingCategories &&
         !isLoadingMainCategories && (
