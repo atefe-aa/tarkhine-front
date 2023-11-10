@@ -6,7 +6,13 @@ import { useMainCategories } from "../features/categories/useMainCategories";
 import DropDown from "./DropDown";
 import ListDropDownItem from "./ListDropDownItem";
 
-function MenuDropDown({ children, options, className, type = "menu" }) {
+function MenuDropDown({
+  children,
+  options,
+  className,
+  type = "menu",
+  onClick,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState(null);
   const { isLoading, branches } = useBranches();
@@ -49,8 +55,10 @@ function MenuDropDown({ children, options, className, type = "menu" }) {
         className={`${className} flex cursor-pointer items-center`}
         onClick={handleClick}
       >
-        <span className="mr-2 inline-flex">{arrowDownIcon}</span>
         {children}
+        <span className="mr-2 inline-flex w-[100%] justify-end">
+          {arrowDownIcon}
+        </span>
       </li>
       {isOpen &&
         (isLoading || isLoadingCategories ? (
@@ -58,6 +66,7 @@ function MenuDropDown({ children, options, className, type = "menu" }) {
         ) : type === "menu" ? (
           proOptions?.map((option) => (
             <ListDropDownItem
+              onClick={onClick}
               key={option.name}
               option={option}
               className={className}

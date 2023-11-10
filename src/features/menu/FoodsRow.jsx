@@ -14,7 +14,7 @@ function FoodsRow({ frame = false, title, foodList }) {
       >
         {title}
       </div>
-      <div className="foods-row-container  inline-flex flex-row-reverse items-center justify-between gap-6 self-stretch overflow-scroll pr-4 md:pr-10 ">
+      <div className="foods-row-container  inline-flex  items-center justify-between gap-6 self-stretch overflow-scroll pr-4 md:pr-10 ">
         {foodList?.map((food) => (
           <FoodCard foodData={food} key={food.id} />
         ))}
