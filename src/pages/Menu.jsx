@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { useBranchMenu } from "../features/menu/useBranchMenu";
 import { useAllCategories } from "../features/categories/useAllCategories";
 import { useMainCategories } from "../features/categories/useMainCategories";
+import CartCounterIcon from "../features/cart/CartCounterIcon";
 
 const tabGroupStyle =
   "container max-w-[1224px] mx-auto flex items-center justify-start px-5 text-[13px] gap-x-4 mb-2 md:text-base";
@@ -102,6 +103,7 @@ function Menu() {
         <Link to="/cart" className={cartButtonStyle}>
           <span className="md:hidden">{shoppingCartIcon}</span>
           <span className="hidden md:block">{shoppingCartDesktopIcon}</span>
+          <CartCounterIcon />
           <span>تکمیل خرید</span>
         </Link>
       </div>

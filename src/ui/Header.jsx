@@ -1,26 +1,23 @@
 import MobileMenu from "./MobileMenu";
 import { Link, useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
-
-// functions
-// import { convertToFa } from "../utils/functions";
-
 // URLs
 import { headerButtonURLs } from "../utils/URLs";
 
 // icons
 import {
-  cartIcon,
-  cartIconDesktop,
   userIcon,
   userIconDesktop,
   searchIcon,
+  cartIcon,
+  cartIconDesktop,
 } from "../icons/headerIcons";
 import { useState } from "react";
 import { navigation } from "../utils/constants";
 import NavItem from "./NavItem";
 import MenuDropDown from "./MenuDropDown";
 import Logo from "./Logo";
+import CartCounterIcon from "../features/cart/CartCounterIcon";
 
 // styles
 const headerStyle =
@@ -35,8 +32,6 @@ const linkBoxItemStyle =
   "p-[0.25em] md:p-[0.5em] bg-[#E5F2E9] text-[#417F56] rounded md:rounded-md scale-[1.2] md:scale-100 relative duration-300";
 const linkBoxItemActiveStyle =
   "p-[0.25em] md:p-[0.5em] bg-[#417F56] text-white rounded md:rounded-md scale-[1.2] md:scale-100 relative duration-300";
-// const itemsCounterStyle =
-//   "absolute -top-1 -right-1.5 text-[10px] text-white bg-[#61AE7B] rounded-full px-1  md:right-0.5 md:top-0.5 font-medium";
 
 const Header = () => {
   // const state = useSelector((state) => state.cartState);
@@ -61,23 +56,19 @@ const Header = () => {
           <Link to="/search" className={`${linkBoxItemStyle} hidden md:block `}>
             {searchIcon}
           </Link>
-
           <Link
-            to="/cart"
-            className={
-              headerButtonURLs.slice(0, 3).includes(window.location.href)
-                ? linkBoxItemActiveStyle
-                : linkBoxItemStyle
-            }
-          >
-            <span className="md:hidden">{cartIcon}</span>
-            <span className="hidden md:block">{cartIconDesktop}</span>
-            {/* {isLoggedIn && (
-              <span className={itemsCounterStyle}>
-                {convertToFa(state.itemsCounter)}
-              </span>
-            )} */}
-          </Link>
+      to="/cart"
+      className={
+        headerButtonURLs.slice(0, 3).includes(window.location.href)
+          ? linkBoxItemActiveStyle
+          : linkBoxItemStyle
+      }
+    >
+      <span className="md:hidden">{cartIcon}</span>
+      <span className="hidden md:block">{cartIconDesktop}</span>
+
+         <CartCounterIcon />
+    </Link>
 
           <button
             className={
