@@ -8,7 +8,7 @@ function UpdateItemQuantity({ foodId, children, currentCount }) {
     <div className="flex items-center justify-center gap-1 md:gap-3">
       <button
         disabled={isPending}
-        className="h-6 w-6 rounded-full bg-slate-100 text-center"
+        className="h-4 w-4 text-xs md:h-6 md:w-6 md:text-base rounded-full bg-slate-100 text-center"
         onClick={() => updateCart({ foodId, count: currentCount - 1 })}
       >
         {isPending ? (
@@ -17,10 +17,10 @@ function UpdateItemQuantity({ foodId, children, currentCount }) {
           "-"
         )}
       </button>
-      <span className="text-sm font-medium">{children}</span>
+      <span className="text-xs md:text-sm font-medium">{children}</span>
       <button
         disabled={isPending}
-        className="h-6 w-6 rounded-full bg-slate-100 text-center"
+        className="h-4 w-4 text-xs md:h-6 md:w-6 md:text-base rounded-full bg-slate-100 text-center"
         onClick={() => updateCart({ foodId, count: currentCount + 1 })}
       >
         {isPending ? (

@@ -7,7 +7,7 @@ function DeleteItem({ foodId }) {
   return (
     <button
       disabled={isPending}
-      className="w-10"
+      className="w-5 md:w-10 items-center flex"
       onClick={() => updateCart({ foodId, count: 0 })}
     >
       {isPending ? (

@@ -4,7 +4,7 @@ import { arrowLeftDesktopIcon } from "../../icons/introductionIcons";
 import { arrowLeftIcon } from "../../icons/foodsPageIcons";
 
 const branchesBoxStyle =
-  "flex items-center gap-x-2 border  hover:border-[#417F56] hover:shadow-md duration-500 rounded-lg overflow-hidden mb-3 md:flex-col md:gap-y-2 md:w-[18em]";
+  "flex items-center gap-x-2 border cursor-pointer  hover:border-[#417F56] hover:shadow-lg duration-700 rounded-lg overflow-hidden mb-3 md:flex-col md:gap-y-2 md:w-[18em]";
 
 const coverStyle =
   "bg-[image:var(--image-url)] bg-cover bg-center w-[9em] h-20 md:w-[18em] md:h-36 lg:h-[14.375em]";

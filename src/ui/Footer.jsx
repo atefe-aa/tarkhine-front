@@ -74,7 +74,7 @@ const Footer = () => {
               width={60}
             /> : <ul className={ulStyle}>
             {branches && branches.map((branch) => (
-              <ListItem key={branch.id} className={liStyle} link="/contact">
+              <ListItem key={branch.id} className={liStyle} link={`/branch/${branch.id}`}>
                 {branch.name}
               </ListItem>
             ))}

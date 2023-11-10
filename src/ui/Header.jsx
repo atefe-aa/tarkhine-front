@@ -10,8 +10,6 @@ import { headerButtonURLs } from "../utils/URLs";
 
 // icons
 import {
-  logo,
-  logoDesktop,
   cartIcon,
   cartIconDesktop,
   userIcon,
@@ -22,6 +20,7 @@ import { useState } from "react";
 import { navigation } from "../utils/constants";
 import NavItem from "./NavItem";
 import MenuDropDown from "./MenuDropDown";
+import Logo from "./Logo";
 
 // styles
 const headerStyle =
@@ -126,12 +125,7 @@ const Header = () => {
             )}
           </ul>
         </div>
-        <div>
-          <span className=" md:hidden">{logo}</span>
-          <span className="hidden md:block md:scale-[.8] lg:scale-100">
-            {logoDesktop}
-          </span>
-        </div>
+        <Logo />
         <div className="md:hidden">
           <MobileMenu />
         </div>

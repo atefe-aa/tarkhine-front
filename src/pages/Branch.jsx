@@ -29,17 +29,23 @@ function Branch() {
       {recLoading ? (
         <ReactLoading type="bubbles" color="#417F56" height={60} width={60} />
       ) : (
-        <FoodsRow foodList={recommendedMenu} title="پیشنهاد ویژه" />
+        recommendedMenu.length > 0 && (
+          <FoodsRow foodList={recommendedMenu} title="پیشنهاد ویژه" />
+        )
       )}
       {popLoading ? (
         <ReactLoading type="bubbles" color="#417F56" height={60} width={60} />
       ) : (
-        <FoodsRow title="غذاهای محبوب" frame={true} foodList={popularMenu} />
+        popularMenu.length > 0 && (
+          <FoodsRow title="غذاهای محبوب" frame={recommendedMenu?.length > 0 } foodList={popularMenu} />
+        )
       )}
       {catLoading ? (
         <ReactLoading type="bubbles" color="#417F56" height={60} width={60} />
       ) : (
-        <FoodsRow title="غذاهای غیرایرانی" foodList={menuByCategory} />
+        menuByCategory.length > 0 && (
+          <FoodsRow title="غذاهای غیرایرانی"  foodList={menuByCategory} />
+        )
       )}
 
       <Button link={`/menu/${branchId}`} className="font-bold">

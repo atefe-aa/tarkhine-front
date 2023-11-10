@@ -71,13 +71,16 @@ function FoodCard({ foodData }) {
           </div>
         </div>
       </div>
-      <div className="inline-flex h-7 items-center justify-center self-stretch md:h-10">
+      {/* <div className="inline-flex h-7 items-center justify-center  md:h-10">
         <div className="flex h-7 shrink grow basis-0 items-center justify-center gap-2 rounded bg-[#417F56] py-2 md:h-10 md:px-4">
-          <div className="leading-0 text-center text-xs capitalize text-white md:text-base md:font-medium md:leading-7">
-<AddToCartButton foodId={id} />
-          </div>
+          <div className=""> */}
+      <AddToCartButton
+        className="leading-0 inline-flex h-7 px-4 shrink grow basis-0 items-center justify-center gap-2 self-stretch rounded bg-[#417F56] py-2 text-center text-xs  text-white md:h-10 md:px-4 md:text-base md:font-medium md:leading-7"
+        foodId={id}
+      />
+      {/* </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
