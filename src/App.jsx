@@ -5,7 +5,6 @@ import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Policies from "./pages/Policies";
 import Branch from "./pages/Branch";
-import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import Menu from "./pages/Menu";
 import PaymentStatus from "./pages/PaymentStatus";
@@ -17,6 +16,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Search from "./pages/Search";
 import { Toaster } from "react-hot-toast";
 import PageNotFound from "./pages/PageNotFound";
+import ShopCart from "./pages/ShopCart";
 
 function App() {
   const queryClient = new QueryClient();
@@ -33,7 +33,7 @@ function App() {
             <Route path="privacy" element={<Privacy />} />
             <Route path="branch/:branchId" element={<Branch />} />
             <Route path="branchApply" element={<BranchApply />} />
-            <Route path="cart" element={<Cart />} />
+            <Route path="cart" element={<ShopCart />} />
             <Route path="contact" element={<Contact />} />
             <Route path="FAQ" element={<FAQ />} />
             <Route path="menu/:branchId" element={<Menu />} />

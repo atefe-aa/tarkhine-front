@@ -54,7 +54,7 @@ export const ratingDesktop = {
   filledIcon: <span>{starDesktopIcon}</span>,
 };
 
-const Food = ({ productData }) => {
+const Food = ({ productData, className="" }) => {
   const { name, price, discount, description, pictures, id, rating } =
     productData;
   const discountedPrice = price - (price * discount) / 100;
@@ -65,7 +65,7 @@ const Food = ({ productData }) => {
   }
 
   return (
-    <div className={foodBoxStyle}>
+    <div className={`${foodBoxStyle} ${className}`}>
       <Link to={`/menu`}>
         <img src={pictures[0]} alt={name} className={foodImgStyle} />
       </Link>

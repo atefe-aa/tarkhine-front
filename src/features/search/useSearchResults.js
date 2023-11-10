@@ -13,6 +13,7 @@ export function useSearchResults() {
   } = useQuery({
     queryKey: ["searchResults"],
     queryFn: () => search({ query }),
+    retry: false,
   });
 
   return { searchResults, isLoading, error };

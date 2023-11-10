@@ -12,6 +12,7 @@ export function usePopularMenu() {
   } = useQuery({
     queryKey: ["popularMenu", branchId],
     queryFn: () => getPopularMenu(branchId),
+    retry: false,
   });
   return { popularMenu, isLoading, error };
 }

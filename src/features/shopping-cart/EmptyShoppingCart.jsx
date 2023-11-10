@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import emptyPage from "../../images/empty-page.svg";
 
@@ -20,7 +19,7 @@ const EmptyShoppingCart = () => {
         className={imgBoxStyle}
       >
         <p className={pStyle}>شما هنوز هیچ محصولی انتخاب نکرده‌اید!</p>
-        <Link to="/menu" className={linkStyle}>
+        <Link to="/" className={linkStyle}>
           منوی رستوران
         </Link>
       </div>

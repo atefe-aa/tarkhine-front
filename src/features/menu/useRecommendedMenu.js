@@ -12,6 +12,7 @@ export function useRecommendedMenu() {
   } = useQuery({
     queryKey: ["recommendedMenu", branchId],
     queryFn: () => getRecommendedMenu(branchId),
+    retry: false,
   });
   return { recommendedMenu, isLoading, error };
 }

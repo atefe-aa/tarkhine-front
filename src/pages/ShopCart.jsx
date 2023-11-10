@@ -1,17 +1,13 @@
-import React, { useEffect, Fragment, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 
 // Components
-import Cart from "./Cart";
-import EmptyShoppingCart from "./EmptyShoppingCart";
-
-// Actions
-import { clear } from "../redux/cart/cartAction";
+import EmptyShoppingCart from "../features/shopping-cart/EmptyShoppingCart";
+// import Cart from "../features/shopping-cart/Cart";
 
 // Functions
-import { convertToFa } from "../helper/functions";
+import { convertToFa } from "../utils/functions";
 
 // Icons
 import {
@@ -25,8 +21,12 @@ import {
   cartDesktopIcon,
   tickSquareIcon,
   walletIcon,
-} from "../../icons/shopCartIcons";
-import { closeIcon } from "../../icons/mobileMenuIcons";
+} from "../icons/shopCartIcons";
+import { closeIcon } from "../icons/mobileMenuIcons";
+import { useCart } from "../features/cart/useCart";
+import { useEmptyCart } from "../features/cart/useEmptyCart";
+import { useDetailedCart } from "../features/cart/useDetailedCart";
+import Food from "../features/menu/Food";
 
 // Styles
 export const containerStyle =
@@ -77,11 +77,34 @@ const settlementCardButtonStyle =
   "bg-[#417F56] text-white rounded py-2 text-xs font-medium flex items-center justify-center gap-x-1 md:text-base";
 
 const ShopCart = () => {
-  const state = useSelector((state) => state.cartState);
-  const isLoggedIn = useSelector((state) => state.authState.isLoggedIn);
-  const dispatch = useDispatch();
+  const isLoggedIn = true;
+  useEffect(() => {
+    document.title = "سبد خرید";
+  }, []);
 
+  const { data, isLoading } = useCart();
+  const { isPending, clearCart } = useEmptyCart();
+  const { data: detailedCart, isLoading: isLoadingDetails } = useDetailedCart();
   let [isOpen, setIsOpen] = useState(false);
+
+  if (isLoading || isPending || isLoadingDetails) return null;
+
+  let totalPriceToPay = 0;
+  let totalPrice = 0;
+  let count = 0;
+  if ( detailedCart && detailedCart.data  && data && data.data) {
+    count = Object.values(data.data).reduce((acc, item) => acc + item, 0);
+
+    detailedCart.data.forEach((item) => {
+      totalPrice = totalPrice + item.food.price * item.count;
+      totalPriceToPay =
+        totalPriceToPay +
+        (item.food.price - (item.food.price * item.food.discount) / 100) *
+          item.count;
+    });
+  }
+
+  const totalDiscount = totalPrice - totalPriceToPay;
 
   function closeModal() {
     setIsOpen(false);
@@ -91,10 +114,6 @@ const ShopCart = () => {
     setIsOpen(true);
   }
 
-  useEffect(() => {
-    document.title = "سبد خرید";
-  }, []);
-
   return (
     <div className={containerStyle}>
       <div className={headerStyle}>
@@ -102,11 +121,9 @@ const ShopCart = () => {
         <span className="pl-2">سبد خرید</span>
         <button
           onClick={() => {
-            if (state.itemsCounter > 0) openModal();
+            if (count > 0) openModal();
           }}
-          className={
-            state.itemsCounter > 0 ? "text-[#353535]" : "text-[#CBCBCB]"
-          }
+          className={count > 0 ? "text-[#353535]" : "text-[#CBCBCB]"}
         >
           {trashIcon}
         </button>
@@ -155,16 +172,16 @@ const ShopCart = () => {
                     <div className={dialogButtonDivStyle}>
                       <button
                         onClick={closeModal}
-                        className={`${dialogButtonStyle} text-[#417F56] border-[#417F56]`}
+                        className={`${dialogButtonStyle} border-[#417F56] text-[#417F56]`}
                       >
                         بازگشت
                       </button>
                       <button
                         onClick={() => {
-                          dispatch(clear());
+                          clearCart();
                           closeModal();
                         }}
-                        className={`${dialogButtonStyle} text-[#C30000] border-[#FFF2F2] bg-[#FFF2F2]`}
+                        className={`${dialogButtonStyle} border-[#FFF2F2] bg-[#FFF2F2] text-[#C30000]`}
                       >
                         حذف
                       </button>
@@ -200,35 +217,36 @@ const ShopCart = () => {
       </div>
       {isLoggedIn ? (
         <>
-          {state.itemsCounter === 0 ? (
+          {count === 0 ? (
             <EmptyShoppingCart />
           ) : (
-            <div className={state.itemsCounter > 0 ? mainDivStyle : ""}>
-              <div className={state.itemsCounter > 0 ? cartDivStyle : ""}>
-                {state.selectedItems.map((item) => (
-                  <Cart key={item.id} data={item} />
+            <div className={count > 0 ? mainDivStyle : ""}>
+              <div className={count > 0 ? cartDivStyle : ""}>
+                {detailedCart.data.map((item) => (
+                  // <Cart key={item.id} data={item} />
+                  <Food
+                    key={item.food.id}
+                    className="mt-4"
+                    productData={item.food}
+                  />
                 ))}
               </div>
 
-              {state.itemsCounter > 0 && (
+              {count > 0 && (
                 <div className={settlementCardStyle}>
                   <div className={settlementCardCartStyle}>
                     <div
                       className={`${settlementCardPriceDivStyle} !text-[#353535]`}
                     >
                       <span>سبد خرید</span>
-                      <span className="text-sm">
-                        ({convertToFa(state.itemsCounter)})
-                      </span>
+                      <span className="text-sm">({convertToFa(count)})</span>
                     </div>
                     <button
                       onClick={() => {
-                        if (state.itemsCounter > 0) openModal();
+                        if (count > 0) openModal();
                       }}
                       className={
-                        state.itemsCounter > 0
-                          ? "text-[#353535]"
-                          : "text-[#CBCBCB]"
+                        count > 0 ? "text-[#353535]" : "text-[#CBCBCB]"
                       }
                     >
                       {trashDesktopIcon}
@@ -238,7 +256,7 @@ const ShopCart = () => {
                   <div className={settlementCardDiscountStyle}>
                     <span>تخفیف محصولات</span>
                     <div className={settlementCardPriceDivStyle}>
-                      <span>{convertToFa(state.discount)}</span>
+                      <span>{convertToFa(totalDiscount)}</span>
                       <span>تومان</span>
                     </div>
                   </div>
@@ -257,7 +275,7 @@ const ShopCart = () => {
                       <span className="hidden md:block">
                         {warningDesktopIcon}
                       </span>
-                      <p className="text-justify leading-5 font-medium">
+                      <p className="text-justify font-medium leading-5">
                         هزینه ارسال در ادامه بر اساس آدرس، زمان و نحوه ارسال
                         انتخابی شما محاسبه و به این مبلغ اضافه خواهد شد.
                       </p>
@@ -267,7 +285,7 @@ const ShopCart = () => {
                   <div className={payableStyle}>
                     <span>مبلغ قابل پرداخت</span>
                     <div className={payableDivStyle}>
-                      <span>{convertToFa(state.total)}</span>
+                      <span>{convertToFa(totalPriceToPay)}</span>
                       <span>تومان</span>
                     </div>
                   </div>

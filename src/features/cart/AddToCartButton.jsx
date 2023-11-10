@@ -12,7 +12,7 @@ function AddToCartButton({ foodId, className }) {
     return (
       <ReactLoading type="bubbles" color="#417F56" height={60} width={60} />
     );
-  const isInCart = Object.prototype.hasOwnProperty.call(data.data, foodId);
+  const isInCart = !isLoading && data && data.data && Object.prototype.hasOwnProperty.call(data.data, foodId);
   const currentCount = isInCart && data.data[foodId];
   return (
     <div>

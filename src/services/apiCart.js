@@ -23,6 +23,27 @@ export async function getCart() {
   }
 }
 
+export async function getDetailedCart() {
+  try {
+    const res = await fetch(`${API_URL}/detailedcart`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!res.ok)
+      throw new Error("خطایی در هنگام گرفتن اطلاعات سبد خرید رخ داد.");
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw new Error("خطایی در هنگام گرفتن اطلاعات سبد خرید رخ داد.");
+  }
+}
+
 export async function updateCart(cartData) {
   try {
     const res = await fetch(BASE_URL, {
@@ -43,5 +64,26 @@ export async function updateCart(cartData) {
   } catch (e) {
     console.error(e);
     throw new Error("خطایی در هنگام ثبت اطلاعات سبد خرید رخ داد.");
+  }
+}
+
+export async function emptyCart() {
+  try {
+    const res = await fetch(`${API_URL}/emptycart`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!res.ok)
+      throw new Error("خطایی در هنگام گرفتن اطلاعات سبد خرید رخ داد.");
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw new Error("خطایی در هنگام گرفتن اطلاعات سبد خرید رخ داد.");
   }
 }

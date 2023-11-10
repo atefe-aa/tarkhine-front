@@ -7,9 +7,11 @@ const itemsCounterStyle =
 function CartCounterIcon() {
   const { data, isLoading } = useCart();
   if (isLoading) return;
-  const cart = data.data;
-  const count = Object.values(cart).reduce((acc, item) => acc + item, 0);
-
+  const count =
+    !isLoading && data && data.data
+      ? Object.values(data.data).reduce((acc, item) => acc + item, 0)
+      : 0;
+  if (count === 0) return null;
   return <span className={itemsCounterStyle}>{convertToFa(count)}</span>;
 }
 

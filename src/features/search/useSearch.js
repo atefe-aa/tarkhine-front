@@ -17,7 +17,7 @@ export function useSearch() {
     onError: (err) => {
       toast.error(err.message);
     },
-    retry: true,
+    retry: false,
   });
   return { isSearching, search, searchResults };
 }

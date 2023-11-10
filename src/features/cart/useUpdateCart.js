@@ -10,7 +10,9 @@ export function useUpdateCart() {
     isPending,
     error,
   } = useMutation({
+    mutationKey:['cart'],
     mutationFn: updateCartApi,
+    retry:false,
     onSuccess: () => {
       queryClient.invalidateQueries(["cart"]);
     },

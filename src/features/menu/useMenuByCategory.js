@@ -12,6 +12,7 @@ export function useMenuByCategory({categoryId}) {
   } = useQuery({
     queryKey: ["menuByCategory", branchId, categoryId],
     queryFn: () => getMenuByCategory({branchId, categoryId}),
+    retry: false,
   });
   return { menuByCategory, isLoading, error };
 }

@@ -11,6 +11,7 @@ export function useUpdateFavorites() {
   } = useMutation({
     mutationFn: updateFavoritesApi,
     mutationKey: ["favorites"],
+    retry: false,
     onSuccess: () => {
       queryClient.invalidateQueries("favorites");
       toast.success("لیست علاقه مندی ها آپدیت شد.");

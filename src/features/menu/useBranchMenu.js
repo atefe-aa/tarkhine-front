@@ -12,6 +12,7 @@ export function useBranchMenu() {
   } = useQuery({
     queryKey: ["branchMenu", branchId],
     queryFn: () => getBranchMenu({branchId}),
+    retry: false,
   });
   return { branchMenu, isLoading, error };
 }

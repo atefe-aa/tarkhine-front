@@ -10,6 +10,7 @@ export function useFoodRating() {
     data,
   } = useMutation({
     mutationFn: rateFood,
+    retry: false,
     onSuccess: () => {
       toast.success("امتیاز با موفقیت ثبت شد.");
     },
